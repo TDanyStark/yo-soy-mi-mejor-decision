@@ -1,0 +1,1 @@
+export type Type_URL_BASE = string;
