@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Brandon';
+  src: url('/apps/abbott/yo-soy-mi-mejor-decision/fonts/Brandon_reg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon';
+  src: url('/apps/abbott/yo-soy-mi-mejor-decision/fonts/Brandon_blk.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+}
+
+html{
+  font-family: 'Brandon';
+  font-size: 16px;
+  color: #fff;
+}

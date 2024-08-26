@@ -1,4 +1,4 @@
-# YO SOY MI MEJOR DECISIÓN - Woments Healts
+# YO SOY MI MEJOR DECISIÓN - women's health
 
 Este aplicativo tiene como objetivo reforzar los 
 conocimientos entre los estudiantes universitarios 
