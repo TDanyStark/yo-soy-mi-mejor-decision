@@ -15,7 +15,8 @@ export default {
         'abbott-gradient-wh': 'linear-gradient(45deg, #5b2094, #a950a5 55%, #e99ab0);',
       },
       fontFamily: {
-        georgia : ['Georgia', 'ui-serif']
+        georgia : ['Georgia', 'ui-serif'],
+        brandon: ['Brandon', 'ui-serif']
       }
     },
   },
