@@ -1,0 +1,20 @@
+---
+import { URL_BASE } from "@/config";
+---
+
+<section
+  style={`background-image: url(${URL_BASE}img/banner.webp); background-size: cover; background-position: top center;`}
+  class="relative min-h-[250px] md:min-h-[423px] max-w-[1444px] mx-auto flex p-6 md:p-20"
+>
+  <div class="absolute inset-0 bg-black opacity-20"></div>
+  <div class="relative max-w-[300px] xl:max-w-[400px]">
+    <img
+      class="max-w-full h-auto"
+      width="450"
+      height="119"
+      src={`${URL_BASE}img/title-white.webp`}
+      alt="Yo soy mi mejor decisión"
+    />
+  </div>
+</section>
+
