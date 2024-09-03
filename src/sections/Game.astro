@@ -3,7 +3,7 @@ import { URL_BASE } from '@/config';
 import GameApp from '@/components/GameApp';
 ---
 
-<section class="max-w-[1444px] mx-auto bg-gris-abbott">
+<section class="max-w-[1444px] mx-auto bg-gris-abbott" id="game">
   <div class="max-w-[1200px] mx-auto p-2 pt-10 pb-16">
     <div>
       <div class="w-60">
@@ -16,7 +16,7 @@ import GameApp from '@/components/GameApp';
         />
       </div>
     </div>
-    <div class="mt-12">
+    <div class="mt-12 min-h-[800px]">
       <GameApp client:only/>
     </div>
 

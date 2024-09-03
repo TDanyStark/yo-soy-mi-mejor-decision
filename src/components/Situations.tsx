@@ -1,86 +1,93 @@
 import { situations } from "@/info/situations";
 import { URL_BASE } from "@/config";
 
+import { useState, useEffect, useRef } from "react";
+import {
+  BrowserRouter as Router,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import Question from "./Question";
 
-import {useState, useEffect} from 'react';
-import { BrowserRouter as Router, useNavigate, useLocation } from 'react-router-dom';
+const URL_APP = URL_BASE + "app/";
 
-const CardComponent = () => {
+const Situations = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
 
+  const topGameSection = useRef<number>(0);
+  useEffect(() => {
+    topGameSection.current = document.getElementById("game")?.offsetTop || 0;
+  }, []);
+
   useEffect(() => {
     const hash = location.hash;
     if (hash) {
-      const cardId = hash.replace('#', '');
+      const cardId = hash.replace("#", "");
       setSelectedCard(cardId);
     } else {
       setSelectedCard(null);
     }
   }, [location]);
 
+  const selectedSituation = situations.find(
+    (situation) => situation.id === selectedCard
+  );
+
   const handleCardClick = (cardId: string) => {
-    setSelectedCard(cardId);
-    navigate(`${URL_BASE}app/#${cardId}`);
+    navigate(`${URL_APP}#${cardId}`);
+    console.log({
+      top: topGameSection.current,
+      behavior: "smooth",
+    });
+    window.scrollTo({
+      top: topGameSection.current,
+      behavior: "smooth",
+    });
   };
 
   const handleReset = () => {
-    setSelectedCard(null);
-    navigate(URL_BASE + "app/");
+    navigate(URL_APP);
+    console.log({
+      top: topGameSection.current,
+      behavior: "smooth",
+    });
+    window.scrollTo({
+      top: topGameSection.current,
+      behavior: "smooth",
+    });
   };
 
   return (
     <div>
       {selectedCard === null && (
-        <div className="card-container">
-          <div className="card" onClick={() => handleCardClick('card1')}>
-            Card 1
-          </div>
-          <div className="card" onClick={() => handleCardClick('card2')}>
-            Card 2
-          </div>
-          <div className="card" onClick={() => handleCardClick('card3')}>
-            Card 3
-          </div>
-        </div>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {situations.map((situation, index) => (
+            <li
+              key={index}
+              className="bg-morado-abbott aspect-square rounded-3xl grid place-content-center p-4 cursor-pointer"
+              onClick={() => handleCardClick(situation.id)}
+            >
+              <h3 className="font-brandon text-3xl lg:text-4xl uppercase font-bold">
+                {situation.titulo}
+              </h3>
+            </li>
+          ))}
+        </ul>
       )}
 
-      {selectedCard === 'card1' && <div className="card">Card 1 Content</div>}
-      {selectedCard === 'card2' && <div className="card">Card 2 Content</div>}
-      {selectedCard === 'card3' && <div className="card">Card 3 Content</div>}
-
-      <button onClick={handleReset}>Reset</button>
+      {selectedCard !== null && selectedSituation && (
+        <Question selectedSituation={selectedSituation} onReset={handleReset} />
+      )}
     </div>
   );
 };
 
-const Situations = () => (
+const GameSituations = () => (
   <Router>
-    <CardComponent />
+    <Situations />
   </Router>
 );
 
-
-// const Situations = () => {
-//   const navigate = useNavigate();
-//   const location = useLocation();
-
-
-//   return (
-//     <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-//       {situations.map((situation, index) => (
-//         <li
-//           key={index}
-//           className="bg-morado-abbott aspect-square rounded-3xl grid place-content-center p-4 cursor-pointer"
-//         >
-//           <h3 className="font-brandon text-3xl lg:text-4xl uppercase font-bold">
-//             {situation.titulo}
-//           </h3>
-//         </li>
-//       ))}
-//     </ul>
-//   );
-// };
-
-export default Situations;
+export default GameSituations;
