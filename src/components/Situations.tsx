@@ -8,6 +8,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import Question from "./Question";
+import Popup from "./Popup";
 
 const URL_APP = URL_BASE + "app/";
 
@@ -15,8 +16,10 @@ const Situations = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
-
   const topGameSection = useRef<number>(0);
+  const [modalisOpen, setModalIsOpen] = useState<boolean>(false);
+  const [response, setResponse] = useState<string>("");
+
   useEffect(() => {
     topGameSection.current = document.getElementById("game")?.offsetTop || 0;
   }, []);
@@ -37,10 +40,6 @@ const Situations = () => {
 
   const handleCardClick = (cardId: string) => {
     navigate(`${URL_APP}#${cardId}`);
-    console.log({
-      top: topGameSection.current,
-      behavior: "smooth",
-    });
     window.scrollTo({
       top: topGameSection.current,
       behavior: "smooth",
@@ -49,10 +48,6 @@ const Situations = () => {
 
   const handleReset = () => {
     navigate(URL_APP);
-    console.log({
-      top: topGameSection.current,
-      behavior: "smooth",
-    });
     window.scrollTo({
       top: topGameSection.current,
       behavior: "smooth",
@@ -78,8 +73,12 @@ const Situations = () => {
       )}
 
       {selectedCard !== null && selectedSituation && (
-        <Question selectedSituation={selectedSituation} onReset={handleReset} />
+        <Question selectedSituation={selectedSituation} onReset={handleReset} setModalIsOpen={setModalIsOpen} setResponse={setResponse} />
       )}
+
+      <Popup setModalIsOpen={setModalIsOpen} modalisOpen={modalisOpen}>
+        {response}
+      </Popup>
     </div>
   );
 };

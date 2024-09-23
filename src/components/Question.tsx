@@ -4,20 +4,22 @@ import { useState } from "react";
 interface Props {
   selectedSituation: Situacion;
   onReset: () => void;
+  setModalIsOpen: (isOpen: boolean) => void;
+  setResponse: (response: string) => void;
 }
 
-const Question = ({ selectedSituation, onReset }: Props) => {
+const Question = ({ selectedSituation, onReset, setModalIsOpen, setResponse }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string>();
 
   const handlerClick = (opcionId: string) => {
     const selectedAnswer = selectedSituation.opciones.find((opcion) => opcion.id === opcionId);
 
-    if (
-      selectedAnswer?.correcta === true 
-    ) {
-      alert("Respuesta correcta");
+    if (selectedAnswer?.correcta === true) {
+      setModalIsOpen(true)
+      setResponse("¡Correcto!")
     } else {
-      alert("Respuesta incorrecta");
+      setModalIsOpen(true)
+      setResponse("¡Incorrecto!")
     }
   };
 
