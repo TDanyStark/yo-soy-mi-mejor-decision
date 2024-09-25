@@ -9,7 +9,8 @@ export default {
         'rosado-abbott': '#d787b5',
         'blanco-abbott': '#ffffff',
         'negro-abbott': '#010101',
-        'gris-abbott': "#f2f2f1"
+        'gris-abbott': "#f2f2f1",
+        'azul-abbott-corp': "#3391ff;",
       },
       backgroundImage: {
         'abbott-gradient-wh': 'linear-gradient(45deg, #5b2094, #a950a5 55%, #e99ab0);',

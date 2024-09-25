@@ -1,3 +1,5 @@
+// src/components/Situations.tsx
+
 import { situations } from "@/info/situations";
 import { URL_BASE } from "@/config";
 
@@ -54,13 +56,48 @@ const Situations = () => {
     });
   };
 
+  // Función para manejar el botón "Adelante"
+  const handleNext = () => {
+    if (selectedSituation) {
+      const currentIndex = situations.findIndex(
+        (s) => s.id === selectedSituation.id
+      );
+      if (currentIndex < situations.length - 1) {
+        const nextId = situations[currentIndex + 1].id;
+        handleCardClick(nextId);
+      }
+    }
+  };
+
+  // Función para manejar el botón "Atrás"
+  const handlePrev = () => {
+    if (selectedSituation) {
+      const currentIndex = situations.findIndex(
+        (s) => s.id === selectedSituation.id
+      );
+      if (currentIndex > 0) {
+        const prevId = situations[currentIndex - 1].id;
+        handleCardClick(prevId);
+      } else {
+        // Si es la primera situación, resetear al componente principal
+        handleReset();
+      }
+    }
+  };
+
+  // Determinar si la situación actual es la última
+  const isLast =
+    selectedSituation
+      ? situations[situations.length - 1].id === selectedSituation.id
+      : false;
+
   return (
     <div>
       {selectedCard === null && (
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          {situations.map((situation, index) => (
+          {situations.map((situation) => (
             <li
-              key={index}
+              key={situation.id} // Usar 'id' como clave
               className="bg-morado-abbott aspect-square rounded-3xl grid place-content-center p-4 cursor-pointer"
               onClick={() => handleCardClick(situation.id)}
             >
@@ -73,7 +110,15 @@ const Situations = () => {
       )}
 
       {selectedCard !== null && selectedSituation && (
-        <Question selectedSituation={selectedSituation} onReset={handleReset} setModalIsOpen={setModalIsOpen} setResponse={setResponse} />
+        <Question
+          selectedSituation={selectedSituation}
+          handleReset={handleReset}
+          setModalIsOpen={setModalIsOpen}
+          setResponse={setResponse}
+          handleNext={handleNext}
+          handlePrev={handlePrev}
+          isLast={isLast}
+        />
       )}
 
       <Popup setModalIsOpen={setModalIsOpen} modalisOpen={modalisOpen}>

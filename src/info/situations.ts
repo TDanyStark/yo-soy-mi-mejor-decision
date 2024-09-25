@@ -44,12 +44,12 @@ export const situations:Situacion[] = [
       {
         id: "opcion1",
         respuesta: "Valentina y Daniel dejan que la relación fluya un poco más antes de decidir usar un método seguro, pues hasta ahora todo ha salido bien.",
-        correcta: true,
+        correcta: false,
       },
       {
         id: "opcion2",
         respuesta: "Valentina y Daniel deciden acudir al servicio de orientación en salud sexual y reproductiva de su universidad para elegir un método anticonceptivo seguro.",
-        correcta: false,
+        correcta: true,
       },
     ]
   }
